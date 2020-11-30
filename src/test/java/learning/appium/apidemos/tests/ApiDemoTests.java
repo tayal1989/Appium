@@ -14,7 +14,7 @@ import static java.time.Duration.ofSeconds;
 
 public class ApiDemoTests extends BaseClass {
 	
-	@Test(enabled = true)
+	@Test(enabled = true, priority = 1)
 	public void setWifiName() {
 		try {
 			// creates a toggle for the given test, adds all log events under it    
@@ -46,8 +46,8 @@ public class ApiDemoTests extends BaseClass {
 		}
 	}
 	
-	@Test(enabled = true)
-	public void getMenuGesture() {
+	@Test(enabled = true, priority = 2)
+	public void longPressAndSingleTapGesture() {
 		try {
 			// creates a toggle for the given test, adds all log events under it    
 	        ExtentTest test = extent.createTest("LongPress", "Long press to get a menu");
@@ -68,8 +68,44 @@ public class ApiDemoTests extends BaseClass {
 					withDuration(ofSeconds(2)));
 			action.release();
 			action.perform();
+			test.log(Status.PASS, "Long press option");
 			
 			Assert.assertTrue(driver.findElementByXPath("//android.widget.TextView[@text='Sample menu']").isEnabled());
+			test.log(Status.INFO, "Verifies sample menu is enabled or not");
+			
+			System.out.println("Completed....");
+		} catch(Exception ie) {
+			ie.printStackTrace();
+		}
+	}
+	
+	@Test(enabled = true, priority = 3)
+	public void swipeGesture() {
+		try {
+			// creates a toggle for the given test, adds all log events under it    
+	        ExtentTest test = extent.createTest("LongPress", "Long press to get a menu");
+	        TouchAction action = new TouchAction(driver);
+	        
+	        driver.findElementByAccessibilityId("Views").click();
+			test.log(Status.PASS, "Clicks on views");
+			
+			action.tap(tapOptions().withElement(element(driver.findElementByAccessibilityId("Date Widgets"))));
+			action.perform();
+			test.log(Status.PASS, "Clicks on date widgets");
+			
+			driver.findElementByAccessibilityId("2. Inline").click();
+			test.log(Status.PASS, "Clicks on inline");
+			
+			driver.findElementByAccessibilityId("9").click();
+			test.log(Status.PASS, "Clicks on 9");
+			
+			action.longPress(longPressOptions().
+					withElement(element(driver.findElementByAccessibilityId("15"))).
+					withDuration(ofSeconds(2)));
+			action.moveTo(element(driver.findElementByAccessibilityId("45")));
+			action.release();
+			action.perform();
+			test.log(Status.PASS, "Swipe option");
 			
 			System.out.println("Completed....");
 		} catch(Exception ie) {
