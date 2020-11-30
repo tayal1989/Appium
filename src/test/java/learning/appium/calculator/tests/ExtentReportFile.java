@@ -1,4 +1,4 @@
-package learning.appium.tests;
+package learning.appium.calculator.tests;
 
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;

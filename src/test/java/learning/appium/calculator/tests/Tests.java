@@ -1,4 +1,4 @@
-package learning.appium.tests;
+package learning.appium.calculator.tests;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -37,7 +37,7 @@ public class Tests extends BaseClass {
 		equals.click();
 		test.log(Status.PASS, "Press = symbol");
 		
-		String getResult = driver.findElement(By.className("android.widget.TextView")).getText();
+		String getResult = driver.findElement(By.id("com.coloros.calculator:id/result")).getText();
 		test.log(Status.INFO, "Get result");
 		
 		System.out.println("Result is ---> " + getResult);

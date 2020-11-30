@@ -1,11 +1,12 @@
-package learning.appium.tests;
+package learning.appium.apidemos.tests;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -24,7 +25,7 @@ public class BaseClass extends ExtentReportFile {
 	}
 	
 	
-	@BeforeTest
+	@BeforeMethod
 	public void setup() {
 		try {
 			cap = new DesiredCapabilities();
@@ -36,11 +37,12 @@ public class BaseClass extends ExtentReportFile {
 			cap.setCapability(MobileCapabilityType.PLATFORM_NAME, tdc.platformName);
 			cap.setCapability(MobileCapabilityType.VERSION, tdc.platformVersion);
 			cap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 60);
-			cap.setCapability("appPackage", tdc.appPackageCalculator);
-			cap.setCapability("appActivity", tdc.appPackageCalculatorMainPage);
+			cap.setCapability("appPackage", tdc.appPackageApiDemos);
+			cap.setCapability("appActivity", tdc.appPackageApiDemosMainPage);
 			
 			url = new URL(tdc.appiumServerUrl);
 			driver = new AppiumDriver<MobileElement>(url, cap);
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			
 			System.out.println("Application Started....");
 		} catch(MalformedURLException exp) {
@@ -51,9 +53,8 @@ public class BaseClass extends ExtentReportFile {
 	}
 	
 	
-	@AfterTest
+	@AfterMethod
 	public void teardown() {
-		// driver.close();
 		driver.quit();
 	}
 

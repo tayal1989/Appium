@@ -12,8 +12,13 @@ public class TestDataConfig {
 	public String deviceUdid;
 	public String platformName;
 	public String platformVersion;
+	
 	public String appPackageCalculator;
 	public String appPackageCalculatorMainPage;
+	
+	public String appPackageApiDemos;
+	public String appPackageApiDemosMainPage;
+	public String appPackageApiDemosDialog;
 	
 	public String appiumServerUrl;
 
@@ -31,8 +36,13 @@ public class TestDataConfig {
 			deviceUdid = properties.getProperty("device.udid");
 			platformName = properties.getProperty("platform.name");
 			platformVersion = properties.getProperty("platform.version");
+			
 			appPackageCalculator = properties.getProperty("app.package.calculator");
 			appPackageCalculatorMainPage = properties.getProperty("app.activity.main.page");
+			
+			appPackageApiDemos = properties.getProperty("app.package.apidemos");
+			appPackageApiDemosMainPage = properties.getProperty("app.package.apidemos.main.page");
+			appPackageApiDemosDialog = properties.getProperty("app.package.apidemos.dialog");
 			
 			appiumServerUrl = properties.getProperty("appium.server.url");
 		} catch (FileNotFoundException e) {
