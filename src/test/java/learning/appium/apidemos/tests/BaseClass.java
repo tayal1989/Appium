@@ -24,7 +24,6 @@ public class BaseClass extends ExtentReportFile {
 		tdc.populateTestDataConfigLocators();
 	}
 	
-	
 	@BeforeMethod
 	public void setup() {
 		try {
