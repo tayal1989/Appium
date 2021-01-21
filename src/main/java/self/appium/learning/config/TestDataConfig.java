@@ -20,6 +20,9 @@ public class TestDataConfig {
 	public String appPackageApiDemosMainPage;
 	public String appPackageApiDemosDialog;
 	
+	public String appPackageEcommerce;
+	public String appPackageEcommerceMainPage;
+	
 	public String appiumServerUrl;
 
 	public Properties properties;
@@ -43,6 +46,9 @@ public class TestDataConfig {
 			appPackageApiDemos = properties.getProperty("app.package.apidemos");
 			appPackageApiDemosMainPage = properties.getProperty("app.package.apidemos.main.page");
 			appPackageApiDemosDialog = properties.getProperty("app.package.apidemos.dialog");
+			
+			appPackageEcommerce = properties.getProperty("app.package.ecommerce");
+			appPackageEcommerceMainPage = properties.getProperty("app.package.ecommerce.main.page");
 			
 			appiumServerUrl = properties.getProperty("appium.server.url");
 		} catch (FileNotFoundException e) {

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="5" total="6" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="24833" started-at="2020-12-04T10:58:32Z" finished-at="2020-12-04T10:58:57Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="24833" started-at="2020-12-04T10:58:32Z" finished-at="2020-12-04T10:58:57Z">
+      <class name="learning.appium.ecommerce.task.EcommerceTest">
+        <test-method status="PASS" signature="reportSetup()[pri:0, instance:learning.appium.ecommerce.task.EcommerceTest@3fee9989]" name="reportSetup" is-config="true" duration-ms="220" started-at="2020-12-04T10:58:32Z" finished-at="2020-12-04T10:58:32Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- reportSetup -->
+        <test-method status="PASS" signature="setup()[pri:0, instance:learning.appium.ecommerce.task.EcommerceTest@3fee9989]" name="setup" is-config="true" duration-ms="6394" started-at="2020-12-04T10:58:32Z" finished-at="2020-12-04T10:58:39Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="endToEndTest()[pri:1, instance:learning.appium.ecommerce.task.EcommerceTest@3fee9989]" name="endToEndTest" duration-ms="17328" started-at="2020-12-04T10:58:39Z" finished-at="2020-12-04T10:58:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- endToEndTest -->
+        <test-method status="PASS" signature="teardown()[pri:0, instance:learning.appium.ecommerce.task.EcommerceTest@3fee9989]" name="teardown" is-config="true" duration-ms="1092" started-at="2020-12-04T10:58:56Z" finished-at="2020-12-04T10:58:57Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+        <test-method status="PASS" signature="reportTeardown()[pri:0, instance:learning.appium.ecommerce.task.EcommerceTest@3fee9989]" name="reportTeardown" is-config="true" duration-ms="475" started-at="2020-12-04T10:58:57Z" finished-at="2020-12-04T10:58:58Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- reportTeardown -->
+      </class> <!-- learning.appium.ecommerce.task.EcommerceTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
