@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import self.appium.learning.config.TestDataConfig;
@@ -16,7 +15,7 @@ import self.appium.learning.config.TestDataConfig;
 public class ApiDemosTest {
 	public static TestDataConfig tdc = new TestDataConfig();
 	
-	public static AppiumDriver<MobileElement> driver;
+	public static AppiumDriver driver;
 	public static URL url;
 	public static DesiredCapabilities cap;
 	public static AppiumDriverLocalService service;
@@ -45,7 +44,7 @@ public class ApiDemosTest {
 			cap.setCapability("appActivity", tdc.appPackageApiDemosDialog);
 			
 			url = new URL(tdc.appiumServerUrl);
-			driver = new AppiumDriver<MobileElement>(url, cap);
+			driver = new AppiumDriver(url, cap);
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			
 			System.out.println("Application Started....");

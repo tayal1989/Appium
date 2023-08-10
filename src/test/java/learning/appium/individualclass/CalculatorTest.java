@@ -5,10 +5,10 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import self.appium.learning.config.TestDataConfig;
@@ -16,7 +16,7 @@ import self.appium.learning.config.TestDataConfig;
 public class CalculatorTest {
 	public static TestDataConfig tdc = new TestDataConfig();
 	
-	public static AppiumDriver<MobileElement> driver;
+	public static AppiumDriver driver;
 	public static URL url;
 	public static DesiredCapabilities cap;
 	public static AppiumDriverLocalService service;
@@ -45,16 +45,16 @@ public class CalculatorTest {
 			cap.setCapability("appActivity", tdc.appPackageCalculatorMainPage);
 			
 			url = new URL(tdc.appiumServerUrl);
-			driver = new AppiumDriver<MobileElement>(url, cap);
+			driver = new AppiumDriver(url, cap);
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			
 			System.out.println("Application Started....");
 			
-			MobileElement clear = driver.findElement(By.id("com.coloros.calculator:id/clr"));
-			MobileElement one = driver.findElement(By.id("com.coloros.calculator:id/digit_1"));
-			MobileElement two = driver.findElement(By.id("com.coloros.calculator:id/digit_2"));
-			MobileElement plus = driver.findElement(By.id("com.coloros.calculator:id/op_add"));
-			MobileElement equals = driver.findElement(By.id("com.coloros.calculator:id/eq"));
+			WebElement clear = driver.findElement(By.id("com.coloros.calculator:id/clr"));
+			WebElement one = driver.findElement(By.id("com.coloros.calculator:id/digit_1"));
+			WebElement two = driver.findElement(By.id("com.coloros.calculator:id/digit_2"));
+			WebElement plus = driver.findElement(By.id("com.coloros.calculator:id/op_add"));
+			WebElement equals = driver.findElement(By.id("com.coloros.calculator:id/eq"));
 			
 			clear.click();
 			one.click();

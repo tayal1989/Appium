@@ -3,17 +3,17 @@ package learning.appium.ecommerce.task;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.ExtentReports;
 
 public class ExtentReportFile {
-	ExtentHtmlReporter htmlReporter;
+	ExtentSparkReporter htmlReporter;
 	ExtentReports extent;
 	
 	@BeforeSuite
 	public void reportSetup() {
 		// start reporters
-        htmlReporter = new ExtentHtmlReporter("ApiDemoTestReport.html");
+        htmlReporter = new ExtentSparkReporter("ApiDemoTestReport.html");
     
         // create ExtentReports and attach reporter(s)
         extent = new ExtentReports();

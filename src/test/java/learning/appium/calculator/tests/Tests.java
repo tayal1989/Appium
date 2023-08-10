@@ -1,13 +1,12 @@
 package learning.appium.calculator.tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-
-import io.appium.java_client.MobileElement;
 
 public class Tests extends BaseClass {
 	
@@ -16,11 +15,11 @@ public class Tests extends BaseClass {
 		// creates a toggle for the given test, adds all log events under it    
         ExtentTest test = extent.createTest("OpenCalculator", "Open Calculator and do basic calculations");
 		
-		MobileElement clear = driver.findElement(By.id("com.coloros.calculator:id/clr"));
-		MobileElement one = driver.findElement(By.id("com.coloros.calculator:id/digit_1"));
-		MobileElement two = driver.findElement(By.id("com.coloros.calculator:id/digit_2"));
-		MobileElement plus = driver.findElement(By.id("com.coloros.calculator:id/op_add"));
-		MobileElement equals = driver.findElement(By.id("com.coloros.calculator:id/eq"));
+		WebElement clear = driver.findElement(By.id("com.coloros.calculator:id/clr"));
+		WebElement one = driver.findElement(By.id("com.coloros.calculator:id/digit_1"));
+		WebElement two = driver.findElement(By.id("com.coloros.calculator:id/digit_2"));
+		WebElement plus = driver.findElement(By.id("com.coloros.calculator:id/op_add"));
+		WebElement equals = driver.findElement(By.id("com.coloros.calculator:id/eq"));
 		
 		clear.click();
 		test.log(Status.PASS, "Clears the screen");

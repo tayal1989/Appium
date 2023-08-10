@@ -1,5 +1,7 @@
 package learning.appium.apidemos.tests;
 
+import io.appium.java_client.PerformsTouchActions;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -25,24 +27,24 @@ public class ApiDemoTests extends BaseClass {
 			// creates a toggle for the given test, adds all log events under it    
 	        ExtentTest test = extent.createTest("ApiDemos", "Open ApiDemos app and do basic functionality");
 	        
-	        driver.findElementByXPath("//android.widget.TextView[@text='Preference']").click();
+	        driver.findElement(By.xpath("//android.widget.TextView[@text='Preference']")).click();
 			test.log(Status.PASS, "Clicks on preference");
 			
-			driver.findElementByXPath("//android.widget.TextView[@content-desc='3. Preference dependencies']").click();
+			driver.findElement(By.xpath("//android.widget.TextView[@content-desc='3. Preference dependencies']")).click();
 			test.log(Status.PASS, "Clicks on preference dependency");
 			
-			if(!driver.findElementById("android:id/checkbox").isSelected()) {
-				driver.findElementById("android:id/checkbox").click();
+			if(!driver.findElement(By.id("android:id/checkbox")).isSelected()) {
+				driver.findElement(By.id("android:id/checkbox")).click();
 				test.log(Status.PASS, "Clicks on preference wifi checkbox");
 			}			
 			
-			driver.findElementByXPath("//android.widget.TextView[@text='WiFi settings']").click();
+			driver.findElement(By.xpath("//android.widget.TextView[@text='WiFi settings']")).click();
 			test.log(Status.PASS, "Clicks on preference wifi settings");
 			
-			driver.findElementById("android:id/edit").sendKeys("TestAutomation");
+			driver.findElement(By.id("android:id/edit")).sendKeys("TestAutomation");
 			test.log(Status.PASS, "Enters wifi name");
 			
-			driver.findElementByXPath("//android.widget.Button[@text='OK']").click();
+			driver.findElement(By.xpath("//android.widget.Button[@text='OK']")).click();
 			test.log(Status.PASS, "Clicks on OK Button");
 			
 			System.out.println("Completed....");
@@ -56,26 +58,26 @@ public class ApiDemoTests extends BaseClass {
 		try {
 			// creates a toggle for the given test, adds all log events under it    
 	        ExtentTest test = extent.createTest("LongPress", "Long press to get a menu");
-	        TouchAction tapAction = new TouchAction(driver);
+	        TouchAction tapAction = new TouchAction((PerformsTouchActions) driver);
 	        
-	        driver.findElementByAccessibilityId("Views").click();
+	        driver.findElement(By.id("Views")).click();
 			test.log(Status.PASS, "Clicks on views");
 			
-			tapAction.tap(tapOptions().withElement(element(driver.findElementByAccessibilityId("Expandable Lists"))));
+			tapAction.tap(tapOptions().withElement(element(driver.findElement(By.id("Expandable Lists")))));
 			tapAction.perform();
 			test.log(Status.PASS, "Clicks on expandable lists");
 			
-			driver.findElementByAccessibilityId("1. Custom Adapter").click();
+			driver.findElement(By.id("1. Custom Adapter")).click();
 			test.log(Status.PASS, "Clicks on custom adapter");
 			
 			tapAction.longPress(longPressOptions().
-					withElement(element(driver.findElementByXPath("//android.widget.TextView[@text='People Names']"))).
+					withElement(element(driver.findElement(By.xpath("//android.widget.TextView[@text='People Names']")))).
 					withDuration(ofSeconds(2)));
 			tapAction.release();
 			tapAction.perform();
 			test.log(Status.PASS, "Long press option");
 			
-			Assert.assertTrue(driver.findElementByXPath("//android.widget.TextView[@text='Sample menu']").isEnabled());
+			Assert.assertTrue(driver.findElement(By.xpath("//android.widget.TextView[@text='Sample menu']")).isEnabled());
 			test.log(Status.INFO, "Verifies sample menu is enabled or not");
 			
 			System.out.println("Completed....");
@@ -89,25 +91,25 @@ public class ApiDemoTests extends BaseClass {
 		try {
 			// creates a toggle for the given test, adds all log events under it    
 	        ExtentTest test = extent.createTest("Swipe Gesture", "Swiping an element");
-	        TouchAction tapAction = new TouchAction(driver);
+	        TouchAction tapAction = new TouchAction((PerformsTouchActions) driver);
 	        
-	        driver.findElementByAccessibilityId("Views").click();
+	        driver.findElement(By.id("Views")).click();
 			test.log(Status.PASS, "Clicks on views");
 			
-			tapAction.tap(tapOptions().withElement(element(driver.findElementByAccessibilityId("Date Widgets"))));
+			tapAction.tap(tapOptions().withElement(element(driver.findElement(By.id("Date Widgets")))));
 			tapAction.perform();
 			test.log(Status.PASS, "Clicks on date widgets");
 			
-			driver.findElementByAccessibilityId("2. Inline").click();
+			driver.findElement(By.id("2. Inline")).click();
 			test.log(Status.PASS, "Clicks on inline");
 			
-			driver.findElementByAccessibilityId("9").click();
+			driver.findElement(By.id("9")).click();
 			test.log(Status.PASS, "Clicks on 9");
 			
 			tapAction.longPress(longPressOptions().
-					withElement(element(driver.findElementByAccessibilityId("15"))).
+					withElement(element(driver.findElement(By.id("15")))).
 					withDuration(ofSeconds(2)));
-			tapAction.moveTo(element(driver.findElementByAccessibilityId("45")));
+			tapAction.moveTo(element(driver.findElement(By.id("45"))));
 			tapAction.release();
 			tapAction.perform();
 			test.log(Status.PASS, "Swipe option");
@@ -124,14 +126,14 @@ public class ApiDemoTests extends BaseClass {
 			// creates a toggle for the given test, adds all log events under it    
 	        ExtentTest test = extent.createTest("Scrolling Gesture", "Scroll to bottom of screen");
 	        
-	        driver.findElementByAccessibilityId("Views").click();
+	        driver.findElement(By.id("Views")).click();
 			test.log(Status.PASS, "Clicks on views");
 			
 			driver.findElement(MobileBy.AndroidUIAutomator(
 					"new UiScrollable(new UiSelector()).scrollIntoView(text(\"Radio Group\"));"));
 			test.log(Status.INFO, "Scroll into required element");
 			
-			driver.findElementByAccessibilityId("Radio Group").click();
+			driver.findElement(By.id("Radio Group")).click();
 			test.log(Status.PASS, "Clicks on Radio Grouo");
 			Thread.sleep(2000);
 			
@@ -146,17 +148,17 @@ public class ApiDemoTests extends BaseClass {
 		try {
 			// creates a toggle for the given test, adds all log events under it    
 	        ExtentTest test = extent.createTest("Drag and drop Gesture", "Drag one element and drop into another");
-	        TouchAction tapAction = new TouchAction(driver);
+	        TouchAction tapAction = new TouchAction((PerformsTouchActions) driver);
 	        
-	        driver.findElementByAccessibilityId("Views").click();
+	        driver.findElement(By.id("Views")).click();
 			test.log(Status.PASS, "Clicks on views");
 			
-			driver.findElementByAccessibilityId("Drag and Drop").click();
+			driver.findElement(By.id("Drag and Drop")).click();
 			test.log(Status.PASS, "Clicks on drag and drop");
 			
 			tapAction.longPress(longPressOptions().withElement(element(
-					driver.findElementById("io.appium.android.apis:id/drag_dot_1")))).
-					moveTo(element(driver.findElementById("io.appium.android.apis:id/drag_dot_2")));
+					driver.findElement(By.id("io.appium.android.apis:id/drag_dot_1"))))).
+					moveTo(element(driver.findElement(By.id("io.appium.android.apis:id/drag_dot_2"))));
 			tapAction.release();
 			tapAction.perform();
 			test.log(Status.INFO, "Drag one element and drop into another");
@@ -173,10 +175,10 @@ public class ApiDemoTests extends BaseClass {
 			// creates a toggle for the given test, adds all log events under it    
 	        ExtentTest test = extent.createTest("Miscellaneous Commands", "Miscellaneous Commands");
 	        
-	        System.out.println(driver.getContext());
+//	        System.out.println(driver.getContext());
 	        test.log(Status.INFO, "Native or web or hybrid app");
 	        
-	        System.out.println(driver.getOrientation());
+//	        System.out.println(driver.getOrientation());
 	        test.log(Status.INFO, "Portrait or landscape");
 	        
 	        System.out.println(driver.isBrowser());

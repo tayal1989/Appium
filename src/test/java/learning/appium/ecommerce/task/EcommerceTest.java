@@ -1,5 +1,6 @@
 package learning.appium.ecommerce.task;
 
+import io.appium.java_client.PerformsTouchActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -31,18 +32,18 @@ public class EcommerceTest extends BaseClass {
 	        
 	        Thread.sleep(5000); // For the main page to come
 	        
-	        Assert.assertTrue(driver.findElementByXPath("//android.widget.TextView[@text='General Store']").isEnabled());
+	        Assert.assertTrue(driver.findElement(By.xpath("//android.widget.TextView[@text='General Store']")).isEnabled());
 			test.log(Status.PASS, "Reached main page");
 			
-			driver.findElementById("com.androidsample.generalstore:id/btnLetsShop").click();
+			driver.findElement(By.id("com.androidsample.generalstore:id/btnLetsShop")).click();
 			
 //			String toastMessage = driver.findElement(By.xpath("//android.widget.Toast[1]")).getAttribute("name");
 //			System.out.println(toastMessage);		
 			
-			driver.findElementById("com.androidsample.generalstore:id/spinnerCountry").click();
+			driver.findElement(By.id("com.androidsample.generalstore:id/spinnerCountry")).click();
 			driver.findElement(MobileBy.AndroidUIAutomator(
 					"new UiScrollable(new UiSelector()).scrollIntoView(text(\"Argentina\"));"));			
-			driver.findElementByXPath("//android.widget.TextView[@text='Argentina']").click();
+			driver.findElement(By.xpath("//android.widget.TextView[@text='Argentina']")).click();
 						
 			driver.findElement(By.xpath("//*[@text='Female']")).click();
 			driver.findElement(By.id("com.androidsample.generalstore:id/nameField")).click();
@@ -61,26 +62,26 @@ public class EcommerceTest extends BaseClass {
 		try {
 			// creates a toggle for the given test, adds all log events under it    
 	        ExtentTest test = extent.createTest("LongPress", "Long press to get a menu");
-	        TouchAction tapAction = new TouchAction(driver);
+	        TouchAction tapAction = new TouchAction((PerformsTouchActions) driver);
 	        
-	        driver.findElementByAccessibilityId("Views").click();
+	        driver.findElement(By.id("Views")).click();
 			test.log(Status.PASS, "Clicks on views");
 			
-			tapAction.tap(tapOptions().withElement(element(driver.findElementByAccessibilityId("Expandable Lists"))));
+			tapAction.tap(tapOptions().withElement(element(driver.findElement(By.id("Expandable Lists")))));
 			tapAction.perform();
 			test.log(Status.PASS, "Clicks on expandable lists");
 			
-			driver.findElementByAccessibilityId("1. Custom Adapter").click();
+			driver.findElement(By.id("1. Custom Adapter")).click();
 			test.log(Status.PASS, "Clicks on custom adapter");
 			
 			tapAction.longPress(longPressOptions().
-					withElement(element(driver.findElementByXPath("//android.widget.TextView[@text='People Names']"))).
+					withElement(element(driver.findElement(By.xpath("//android.widget.TextView[@text='People Names']")))).
 					withDuration(ofSeconds(2)));
 			tapAction.release();
 			tapAction.perform();
 			test.log(Status.PASS, "Long press option");
 			
-			Assert.assertTrue(driver.findElementByXPath("//android.widget.TextView[@text='Sample menu']").isEnabled());
+			Assert.assertTrue(driver.findElement(By.xpath("//android.widget.TextView[@text='Sample menu']")).isEnabled());
 			test.log(Status.INFO, "Verifies sample menu is enabled or not");
 			
 			System.out.println("Completed....");
@@ -94,25 +95,25 @@ public class EcommerceTest extends BaseClass {
 		try {
 			// creates a toggle for the given test, adds all log events under it    
 	        ExtentTest test = extent.createTest("Swipe Gesture", "Swiping an element");
-	        TouchAction tapAction = new TouchAction(driver);
+	        TouchAction tapAction = new TouchAction((PerformsTouchActions) driver);
 	        
-	        driver.findElementByAccessibilityId("Views").click();
+	        driver.findElement(By.id("Views")).click();
 			test.log(Status.PASS, "Clicks on views");
 			
-			tapAction.tap(tapOptions().withElement(element(driver.findElementByAccessibilityId("Date Widgets"))));
+			tapAction.tap(tapOptions().withElement(element(driver.findElement(By.id("Date Widgets")))));
 			tapAction.perform();
 			test.log(Status.PASS, "Clicks on date widgets");
 			
-			driver.findElementByAccessibilityId("2. Inline").click();
+			driver.findElement(By.id("2. Inline")).click();
 			test.log(Status.PASS, "Clicks on inline");
 			
-			driver.findElementByAccessibilityId("9").click();
+			driver.findElement(By.id("9")).click();
 			test.log(Status.PASS, "Clicks on 9");
 			
 			tapAction.longPress(longPressOptions().
-					withElement(element(driver.findElementByAccessibilityId("15"))).
+					withElement(element(driver.findElement(By.id("15")))).
 					withDuration(ofSeconds(2)));
-			tapAction.moveTo(element(driver.findElementByAccessibilityId("45")));
+			tapAction.moveTo(element(driver.findElement(By.id("45"))));
 			tapAction.release();
 			tapAction.perform();
 			test.log(Status.PASS, "Swipe option");
@@ -129,14 +130,14 @@ public class EcommerceTest extends BaseClass {
 			// creates a toggle for the given test, adds all log events under it    
 	        ExtentTest test = extent.createTest("Scrolling Gesture", "Scroll to bottom of screen");
 	        
-	        driver.findElementByAccessibilityId("Views").click();
+	        driver.findElement(By.id("Views")).click();
 			test.log(Status.PASS, "Clicks on views");
 			
 			driver.findElement(MobileBy.AndroidUIAutomator(
 					"new UiScrollable(new UiSelector()).scrollIntoView(text(\"Radio Group\"));"));
 			test.log(Status.INFO, "Scroll into required element");
 			
-			driver.findElementByAccessibilityId("Radio Group").click();
+			driver.findElement(By.id("Radio Group")).click();
 			test.log(Status.PASS, "Clicks on Radio Grouo");
 			Thread.sleep(2000);
 			
@@ -151,17 +152,17 @@ public class EcommerceTest extends BaseClass {
 		try {
 			// creates a toggle for the given test, adds all log events under it    
 	        ExtentTest test = extent.createTest("Drag and drop Gesture", "Drag one element and drop into another");
-	        TouchAction tapAction = new TouchAction(driver);
+	        TouchAction tapAction = new TouchAction((PerformsTouchActions) driver);
 	        
-	        driver.findElementByAccessibilityId("Views").click();
+	        driver.findElement(By.id("Views")).click();
 			test.log(Status.PASS, "Clicks on views");
 			
-			driver.findElementByAccessibilityId("Drag and Drop").click();
+			driver.findElement(By.id("Drag and Drop")).click();
 			test.log(Status.PASS, "Clicks on drag and drop");
 			
 			tapAction.longPress(longPressOptions().withElement(element(
-					driver.findElementById("io.appium.android.apis:id/drag_dot_1")))).
-					moveTo(element(driver.findElementById("io.appium.android.apis:id/drag_dot_2")));
+					driver.findElement(By.id("io.appium.android.apis:id/drag_dot_1"))))).
+					moveTo(element(driver.findElement(By.id("io.appium.android.apis:id/drag_dot_2"))));
 			tapAction.release();
 			tapAction.perform();
 			test.log(Status.INFO, "Drag one element and drop into another");
@@ -178,10 +179,10 @@ public class EcommerceTest extends BaseClass {
 			// creates a toggle for the given test, adds all log events under it    
 	        ExtentTest test = extent.createTest("Miscellaneous Commands", "Miscellaneous Commands");
 	        
-	        System.out.println(driver.getContext());
+//	        System.out.println(driver.getContext());
 	        test.log(Status.INFO, "Native or web or hybrid app");
 	        
-	        System.out.println(driver.getOrientation());
+//	        System.out.println(driver.getOrientation());
 	        test.log(Status.INFO, "Portrait or landscape");
 	        
 	        System.out.println(driver.isBrowser());

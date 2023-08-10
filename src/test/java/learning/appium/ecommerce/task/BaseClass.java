@@ -9,7 +9,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.remote.MobileCapabilityType;
 import self.appium.learning.config.TestDataConfig;
 
@@ -17,7 +16,7 @@ public class BaseClass extends ExtentReportFile {
 	public TestDataConfig tdc = new TestDataConfig();
 	
 	public DesiredCapabilities cap;
-	public static AppiumDriver<MobileElement> driver;
+	public static AppiumDriver driver;
 	public static URL url;
 	
 	public BaseClass() {
@@ -34,13 +33,13 @@ public class BaseClass extends ExtentReportFile {
 			cap.setCapability(MobileCapabilityType.DEVICE_NAME, tdc.deviceName);
 			cap.setCapability(MobileCapabilityType.UDID, tdc.deviceUdid);
 			cap.setCapability(MobileCapabilityType.PLATFORM_NAME, tdc.platformName);
-			cap.setCapability(MobileCapabilityType.VERSION, tdc.platformVersion);
+			cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, tdc.platformVersion);
 			cap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 60);
 			cap.setCapability("appPackage", tdc.appPackageEcommerce);
 			cap.setCapability("appActivity", tdc.appPackageEcommerceMainPage);
 			
 			url = new URL(tdc.appiumServerUrl);
-			driver = new AppiumDriver<MobileElement>(url, cap);
+			driver = new AppiumDriver(url, cap);
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 			
 			System.out.println("Application Started....");
