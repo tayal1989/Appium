@@ -12,6 +12,7 @@ public class TestDataConfig {
 	public String deviceUdid;
 	public String platformName;
 	public String platformVersion;
+    public String automationName;
 	
 	public String appPackageCalculator;
 	public String appPackageCalculatorMainPage;
@@ -39,6 +40,7 @@ public class TestDataConfig {
 			deviceUdid = properties.getProperty("device.udid");
 			platformName = properties.getProperty("platform.name");
 			platformVersion = properties.getProperty("platform.version");
+            automationName = properties.getProperty("automation.name");
 			
 			appPackageCalculator = properties.getProperty("app.package.calculator");
 			appPackageCalculatorMainPage = properties.getProperty("app.activity.main.page");

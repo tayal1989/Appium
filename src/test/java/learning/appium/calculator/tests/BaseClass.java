@@ -3,56 +3,59 @@ package learning.appium.calculator.tests;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.options.UiAutomator2Options;
+import learning.appium.apidemos.tests.ExtentReportFile;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.remote.MobileCapabilityType;
 import self.appium.learning.config.TestDataConfig;
 
 public class BaseClass extends ExtentReportFile {
-	public TestDataConfig tdc = new TestDataConfig();
-	
-	public DesiredCapabilities cap;
-	public static AppiumDriver driver;
-	public static URL url;
-	
-	public BaseClass() {
-		tdc.populateTestDataConfigLocators();
-	}
-	
-	
-	@BeforeTest
-	public void setup() {
-		try {
-			cap = new DesiredCapabilities();
-			
-			// My Phone Configurations
-			cap.setCapability(MobileCapabilityType.NO_RESET, tdc.noReset);
-			cap.setCapability(MobileCapabilityType.DEVICE_NAME, tdc.deviceName);
-			cap.setCapability(MobileCapabilityType.UDID, tdc.deviceUdid);
-			cap.setCapability(MobileCapabilityType.PLATFORM_NAME, tdc.platformName);
-			cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, tdc.platformVersion);
-			cap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 60);
-			cap.setCapability("appPackage", tdc.appPackageCalculator);
-			cap.setCapability("appActivity", tdc.appPackageCalculatorMainPage);
-			
-			url = new URL(tdc.appiumServerUrl);
-			driver = new AppiumDriver(url, cap);
-			
-			System.out.println("Application Started....");
-		} catch(MalformedURLException exp) {
-			System.out.println(exp.getCause());
-			System.out.println(exp.getMessage());
-			exp.printStackTrace();
-		}
-	}
-	
-	
-	@AfterTest
-	public void teardown() {
-		driver.quit();
-	}
+    public TestDataConfig tdc = new TestDataConfig();
+
+    public static AndroidDriver driver;
+    public static URL url;
+
+    public BaseClass() {
+
+    }
+
+    @BeforeMethod
+    public void setup() {
+        try {
+            tdc.populateTestDataConfigLocators();
+
+            UiAutomator2Options options = getUiAutomator2Options();
+
+            url = new URL(tdc.appiumServerUrl);
+            driver = new AndroidDriver(url, options);
+
+            System.out.println("Application Started....");
+        } catch(MalformedURLException exp) {
+            System.out.println(exp.getCause());
+            System.out.println(exp.getMessage());
+            exp.printStackTrace();
+        }
+    }
+
+    private UiAutomator2Options getUiAutomator2Options() {
+        UiAutomator2Options options = new UiAutomator2Options();
+        options.setAutomationName(tdc.automationName); // Critical addition
+        options.setPlatformName(tdc.platformName);
+        options.setPlatformVersion(tdc.platformVersion);
+        options.setDeviceName(tdc.deviceName);
+        options.setUdid(tdc.deviceUdid);
+        options.setAppPackage(tdc.appPackageCalculator);
+        options.setAppActivity(tdc.appPackageCalculatorMainPage);
+        options.setNoReset(true);
+        return options;
+    }
+
+
+    @AfterMethod
+    public void teardown() {
+        driver.quit();
+    }
 
 }

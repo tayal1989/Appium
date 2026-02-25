@@ -7,8 +7,8 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.ExtentReports;
 
 public class ExtentReportFile {
-	ExtentSparkReporter htmlReporter;
-	ExtentReports extent;
+	public ExtentSparkReporter htmlReporter;
+	public ExtentReports extent;
 	
 	@BeforeSuite
 	public void reportSetup() {
