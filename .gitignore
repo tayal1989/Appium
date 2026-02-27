@@ -4,13 +4,31 @@
 # Log file
 *.log
 
-*.settings
-*.classpath
-*.project
-*.idea
-*.DS_Store
+# Eclipse project files
+.settings/
+.classpath
+.project
 
-# Package Files #
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# VS Code
+.vscode/
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Package Files
 *.jar
 *.war
 *.nar
@@ -19,7 +37,21 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-target/*
-logs/
+# Maven build output
+target/
+
+# Test output & reports
 test-output/
+logs/
+*.html
+surefire-reports/
+
+# Environment & secrets
+.env
+.env.*
+*.properties.local
+
+# Temporary files
+*.tmp
+*.swp
+*~
