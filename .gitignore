@@ -39,6 +39,7 @@ Desktop.ini
 
 # Maven build output
 target/
+resources/
 
 # Test output & reports
 test-output/
