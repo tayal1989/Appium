@@ -2,6 +2,7 @@ package learning.appium.calculator.tests;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
@@ -49,6 +50,9 @@ public class BaseClass extends ExtentReportFile {
         options.setAppPackage(tdc.appPackageCalculator);
         options.setAppActivity(tdc.appPackageCalculatorMainPage);
         options.setNoReset(true);
+        options.setCapability("appium:ensureWebviewsHavePages", true);
+        options.setCapability("appium:nativeWebScreenshot", true);
+        options.setNewCommandTimeout(Duration.ofSeconds(3600));
         return options;
     }
 

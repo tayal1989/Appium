@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 public class WebAppTest extends ExtentReportFile {
 	
@@ -24,7 +24,7 @@ public class WebAppTest extends ExtentReportFile {
 			System.setProperty("webdriver.chrome.driver",
 					System.getProperty("user.dir") + "/resources/chromedriver.exe");
 			webdriver = new ChromeDriver();
-			webdriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			webdriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 			webdriver.manage().window().maximize();
 			
 			System.out.println("Application Started....");

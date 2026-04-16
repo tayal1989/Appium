@@ -20,11 +20,11 @@ public class CalculatorTests extends BaseClass {
         ExtentTest test = extent.createTest("OpenCalculator", "Open Calculator and do basic calculations");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement clear = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.android.bbkcalculator:id/clear")));
-		WebElement one = driver.findElement(By.id("com.android.bbkcalculator:id/digit1"));
-		WebElement two = driver.findElement(By.id("com.android.bbkcalculator:id/digit2"));
-		WebElement plus = driver.findElement(By.id("com.android.bbkcalculator:id/plus"));
-		WebElement equals = driver.findElement(By.id("com.android.bbkcalculator:id/equal"));
+        WebElement clear = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.sec.android.app.popupcalculator:id/calc_keypad_btn_clear")));
+		WebElement one = driver.findElement(By.id("com.sec.android.app.popupcalculator:id/calc_keypad_btn_01"));
+		WebElement two = driver.findElement(By.id("com.sec.android.app.popupcalculator:id/calc_keypad_btn_02"));
+		WebElement plus = driver.findElement(By.id("com.sec.android.app.popupcalculator:id/calc_keypad_btn_add"));
+		WebElement equals = driver.findElement(By.id("com.sec.android.app.popupcalculator:id/calc_keypad_btn_equal"));
 		
 		clear.click();
 		test.log(Status.PASS, "Clears the screen");
@@ -41,11 +41,11 @@ public class CalculatorTests extends BaseClass {
 		equals.click();
 		test.log(Status.PASS, "Press = symbol");
 		
-		String getResult = driver.findElement(By.id("com.android.bbkcalculator:id/input_edit")).getText();
+		String getResult = driver.findElement(By.id("com.sec.android.app.popupcalculator:id/calc_edt_formula")).getText();
 		test.log(Status.INFO, "Get result");
 		
 		System.out.println("Result is ---> " + getResult);
-		Assert.assertEquals(getResult, "3");
+		Assert.assertEquals(getResult.replace(" Calculation result", "").trim(), "3");
 		System.out.println("Completed....");		
 	}
 

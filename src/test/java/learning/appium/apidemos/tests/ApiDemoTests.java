@@ -1,6 +1,5 @@
 package learning.appium.apidemos.tests;
 
-import io.appium.java_client.PerformsTouchActions;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -8,14 +7,12 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.TouchAction;
+import io.appium.java_client.AppiumBy;
 
-import static io.appium.java_client.touch.TapOptions.tapOptions;
-import static io.appium.java_client.touch.LongPressOptions.longPressOptions;
-import static io.appium.java_client.touch.offset.ElementOption.element;
-
-import static java.time.Duration.ofSeconds;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.remote.RemoteWebElement;
+import com.google.common.collect.ImmutableMap;
 
 public class ApiDemoTests extends BaseClass {
 	
@@ -58,23 +55,20 @@ public class ApiDemoTests extends BaseClass {
 		try {
 			// creates a toggle for the given test, adds all log events under it    
 	        ExtentTest test = extent.createTest("LongPress", "Long press to get a menu");
-	        TouchAction tapAction = new TouchAction((PerformsTouchActions) driver);
-	        
 	        driver.findElement(By.id("Views")).click();
 			test.log(Status.PASS, "Clicks on views");
 			
-			tapAction.tap(tapOptions().withElement(element(driver.findElement(By.id("Expandable Lists")))));
-			tapAction.perform();
+			driver.findElement(By.id("Expandable Lists")).click();
 			test.log(Status.PASS, "Clicks on expandable lists");
 			
 			driver.findElement(By.id("1. Custom Adapter")).click();
 			test.log(Status.PASS, "Clicks on custom adapter");
 			
-			tapAction.longPress(longPressOptions().
-					withElement(element(driver.findElement(By.xpath("//android.widget.TextView[@text='People Names']")))).
-					withDuration(ofSeconds(2)));
-			tapAction.release();
-			tapAction.perform();
+			WebElement ele = driver.findElement(By.xpath("//android.widget.TextView[@text='People Names']"));
+			((JavascriptExecutor) driver).executeScript("mobile: longClickGesture", ImmutableMap.of(
+			    "elementId", ((RemoteWebElement) ele).getId(),
+			    "duration", 2000
+			));
 			test.log(Status.PASS, "Long press option");
 			
 			Assert.assertTrue(driver.findElement(By.xpath("//android.widget.TextView[@text='Sample menu']")).isEnabled());
@@ -91,13 +85,10 @@ public class ApiDemoTests extends BaseClass {
 		try {
 			// creates a toggle for the given test, adds all log events under it    
 	        ExtentTest test = extent.createTest("Swipe Gesture", "Swiping an element");
-	        TouchAction tapAction = new TouchAction((PerformsTouchActions) driver);
-	        
 	        driver.findElement(By.id("Views")).click();
 			test.log(Status.PASS, "Clicks on views");
 			
-			tapAction.tap(tapOptions().withElement(element(driver.findElement(By.id("Date Widgets")))));
-			tapAction.perform();
+			driver.findElement(By.id("Date Widgets")).click();
 			test.log(Status.PASS, "Clicks on date widgets");
 			
 			driver.findElement(By.id("2. Inline")).click();
@@ -106,12 +97,13 @@ public class ApiDemoTests extends BaseClass {
 			driver.findElement(By.id("9")).click();
 			test.log(Status.PASS, "Clicks on 9");
 			
-			tapAction.longPress(longPressOptions().
-					withElement(element(driver.findElement(By.id("15")))).
-					withDuration(ofSeconds(2)));
-			tapAction.moveTo(element(driver.findElement(By.id("45"))));
-			tapAction.release();
-			tapAction.perform();
+			WebElement ele15 = driver.findElement(By.id("15"));
+			WebElement ele45 = driver.findElement(By.id("45"));
+			((JavascriptExecutor) driver).executeScript("mobile: dragGesture", ImmutableMap.of(
+			    "elementId", ((RemoteWebElement) ele15).getId(),
+			    "endX", ele45.getLocation().getX() + (ele45.getSize().getWidth() / 2),
+			    "endY", ele45.getLocation().getY() + (ele45.getSize().getHeight() / 2)
+			));
 			test.log(Status.PASS, "Swipe option");
 			
 			System.out.println("Completed....");
@@ -129,7 +121,7 @@ public class ApiDemoTests extends BaseClass {
 	        driver.findElement(By.id("Views")).click();
 			test.log(Status.PASS, "Clicks on views");
 			
-			driver.findElement(MobileBy.AndroidUIAutomator(
+			driver.findElement(AppiumBy.androidUIAutomator(
 					"new UiScrollable(new UiSelector()).scrollIntoView(text(\"Radio Group\"));"));
 			test.log(Status.INFO, "Scroll into required element");
 			
@@ -148,19 +140,19 @@ public class ApiDemoTests extends BaseClass {
 		try {
 			// creates a toggle for the given test, adds all log events under it    
 	        ExtentTest test = extent.createTest("Drag and drop Gesture", "Drag one element and drop into another");
-	        TouchAction tapAction = new TouchAction((PerformsTouchActions) driver);
-	        
 	        driver.findElement(By.id("Views")).click();
 			test.log(Status.PASS, "Clicks on views");
 			
 			driver.findElement(By.id("Drag and Drop")).click();
 			test.log(Status.PASS, "Clicks on drag and drop");
 			
-			tapAction.longPress(longPressOptions().withElement(element(
-					driver.findElement(By.id("io.appium.android.apis:id/drag_dot_1"))))).
-					moveTo(element(driver.findElement(By.id("io.appium.android.apis:id/drag_dot_2"))));
-			tapAction.release();
-			tapAction.perform();
+			WebElement source = driver.findElement(By.id("io.appium.android.apis:id/drag_dot_1"));
+			WebElement target = driver.findElement(By.id("io.appium.android.apis:id/drag_dot_2"));
+			((JavascriptExecutor) driver).executeScript("mobile: dragGesture", ImmutableMap.of(
+			    "elementId", ((RemoteWebElement) source).getId(),
+			    "endX", target.getLocation().getX() + (target.getSize().getWidth() / 2),
+			    "endY", target.getLocation().getY() + (target.getSize().getHeight() / 2)
+			));
 			test.log(Status.INFO, "Drag one element and drop into another");
 			
 			System.out.println("Completed....");

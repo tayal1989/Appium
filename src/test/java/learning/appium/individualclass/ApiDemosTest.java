@@ -2,12 +2,12 @@ package learning.appium.individualclass;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
-import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import self.appium.learning.config.TestDataConfig;
@@ -15,9 +15,9 @@ import self.appium.learning.config.TestDataConfig;
 public class ApiDemosTest {
 	public static TestDataConfig tdc = new TestDataConfig();
 	
-	public static AppiumDriver driver;
+	public static AndroidDriver driver;
 	public static URL url;
-	public static DesiredCapabilities cap;
+	public static UiAutomator2Options options;
 	public static AppiumDriverLocalService service;
 	public static AppiumServiceBuilder builder;
 	
@@ -32,20 +32,20 @@ public class ApiDemosTest {
 	public static void openCalculator() {
 		try {
 			ApiDemosTest ct = new ApiDemosTest(); // For initializing test data config properties
-			cap = new DesiredCapabilities();
+			options = new UiAutomator2Options();
 			
 			// My Phone Configurations
-			cap.setCapability("noReset", tdc.noReset);
-			cap.setCapability("deviceName", tdc.deviceName);
-			cap.setCapability("udid", tdc.deviceUdid);
-			cap.setCapability("platformName", tdc.platformName);
-			cap.setCapability("platformVersion", tdc.platformVersion);
-			cap.setCapability("appPackage", tdc.appPackageApiDemos);
-			cap.setCapability("appActivity", tdc.appPackageApiDemosDialog);
+			options.setNoReset(Boolean.parseBoolean(tdc.noReset));
+			options.setDeviceName(tdc.deviceName);
+			options.setUdid(tdc.deviceUdid);
+			options.setPlatformName(tdc.platformName);
+			options.setPlatformVersion(tdc.platformVersion);
+			options.setAppPackage(tdc.appPackageApiDemos);
+			options.setAppActivity(tdc.appPackageApiDemosDialog);
 			
 			url = new URL(tdc.appiumServerUrl);
-			driver = new AppiumDriver(url, cap);
-			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			driver = new AndroidDriver(url, options);
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 			
 			System.out.println("Application Started....");
 			

@@ -2,21 +2,19 @@ package learning.appium.ecommerce.task;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
-import org.openqa.selenium.remote.DesiredCapabilities;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.options.UiAutomator2Options;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.remote.MobileCapabilityType;
 import self.appium.learning.config.TestDataConfig;
 
 public class BaseClass extends ExtentReportFile {
 	public TestDataConfig tdc = new TestDataConfig();
 	
-	public DesiredCapabilities cap;
-	public static AppiumDriver driver;
+	public UiAutomator2Options options;
+	public static AndroidDriver driver;
 	public static URL url;
 	
 	public BaseClass() {
@@ -26,21 +24,21 @@ public class BaseClass extends ExtentReportFile {
 	@BeforeMethod
 	public void setup() {
 		try {
-			cap = new DesiredCapabilities();
+			options = new UiAutomator2Options();
 			
 			// My Phone Configurations
-			cap.setCapability(MobileCapabilityType.NO_RESET, tdc.noReset);
-			cap.setCapability(MobileCapabilityType.DEVICE_NAME, tdc.deviceName);
-			cap.setCapability(MobileCapabilityType.UDID, tdc.deviceUdid);
-			cap.setCapability(MobileCapabilityType.PLATFORM_NAME, tdc.platformName);
-			cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, tdc.platformVersion);
-			cap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 60);
-			cap.setCapability("appPackage", tdc.appPackageEcommerce);
-			cap.setCapability("appActivity", tdc.appPackageEcommerceMainPage);
+			options.setNoReset(Boolean.parseBoolean(tdc.noReset));
+			options.setDeviceName(tdc.deviceName);
+			options.setUdid(tdc.deviceUdid);
+			options.setPlatformName(tdc.platformName);
+			options.setPlatformVersion(tdc.platformVersion);
+			options.setNewCommandTimeout(Duration.ofSeconds(60));
+			options.setAppPackage(tdc.appPackageEcommerce);
+			options.setAppActivity(tdc.appPackageEcommerceMainPage);
 			
 			url = new URL(tdc.appiumServerUrl);
-			driver = new AppiumDriver(url, cap);
-			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver = new AndroidDriver(url, options);
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 			
 			System.out.println("Application Started....");
 		} catch(MalformedURLException exp) {
